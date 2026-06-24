@@ -1,0 +1,246 @@
+:root {
+  --bg: #09111f;
+  --bg-soft: rgba(16, 27, 45, 0.82);
+  --panel: rgba(10, 19, 33, 0.88);
+  --border: rgba(122, 162, 255, 0.16);
+  --text: #edf3ff;
+  --muted: #8ba0c7;
+  --accent: #73e0a9;
+  --accent-strong: #27c47f;
+  --warning: #ff8a65;
+  --danger: #ff6b6b;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(39, 196, 127, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(94, 146, 255, 0.16), transparent 24%),
+    linear-gradient(160deg, #040812 0%, #09111f 52%, #0f1d35 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.92), transparent);
+}
+
+.page-shell {
+  width: min(1200px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-end;
+  margin-bottom: 28px;
+}
+
+.eyebrow,
+.card-label,
+.status-label,
+.info-label {
+  margin: 0 0 8px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.hero h1,
+.section-head h3,
+.metrics-card h2 {
+  margin: 0;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
+  line-height: 0.95;
+}
+
+.hero-copy {
+  max-width: 720px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #ccd8f4;
+  margin-top: 14px;
+}
+
+.status-panel,
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.status-panel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  min-width: 220px;
+}
+
+.status-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--warning);
+  box-shadow: 0 0 20px rgba(255, 138, 101, 0.65);
+}
+
+.status-dot.connected {
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(115, 224, 169, 0.7);
+}
+
+.status-dot.disconnected {
+  background: var(--danger);
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.7);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 18px;
+}
+
+.card {
+  border-radius: 24px;
+  padding: 22px;
+}
+
+.metrics-card {
+  grid-column: span 3;
+}
+
+.metrics-card h2 {
+  font-size: clamp(1.8rem, 2.6vw, 2.6rem);
+  margin-bottom: 8px;
+}
+
+.card-footnote {
+  margin: 0;
+  color: #bfd0f8;
+  font-size: 0.95rem;
+}
+
+.chart-card {
+  grid-column: span 8;
+  min-height: 420px;
+}
+
+.info-card,
+.trades-card {
+  grid-column: span 4;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.badge {
+  font-family: "IBM Plex Mono", monospace;
+  background: rgba(115, 224, 169, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(115, 224, 169, 0.24);
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+
+#price-chart {
+  width: 100%;
+  height: 320px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.info-grid strong,
+.trade-list,
+.metrics-card h2,
+#connection-status {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.trade-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.trade-list li {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 14px;
+  color: #dbe5ff;
+}
+
+.trade-list small {
+  display: block;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+@media (max-width: 980px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .metrics-card,
+  .chart-card,
+  .info-card,
+  .trades-card {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100vw - 20px, 100%);
+    padding-top: 18px;
+  }
+
+  .card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Market Live Monitor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Real-Time Analytics Pipeline</p>
+          <h1>Crypto Market Live Monitor</h1>
+          <p class="hero-copy">
+            Binance trades stream into Kafka, analytics build rolling metrics,
+            and the dashboard receives live updates through a WebSocket API.
+          </p>
+        </div>
+        <div class="status-panel">
+          <span id="connection-dot" class="status-dot"></span>
+          <div>
+            <p class="status-label">WebSocket Status</p>
+            <strong id="connection-status">Connecting...</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="card metrics-card">
+          <p class="card-label">Last Price</p>
+          <h2 id="last-price">--</h2>
+          <p class="card-footnote">Latest market price pushed by the API</p>
+        </section>
+
+        <section class="card metrics-card">
+          <p class="card-label">Rolling Average</p>
+          <h2 id="avg-price">--</h2>
+          <p class="card-footnote">Average trade price over the live window</p>
+        </section>
+
+        <section class="card metrics-card">
+          <p class="card-label">1 Minute Volume</p>
+          <h2 id="window-volume">--</h2>
+          <p class="card-footnote">Sum of quantities traded in the last minute</p>
+        </section>
+
+        <section class="card metrics-card">
+          <p class="card-label">Price Change</p>
+          <h2 id="price-change">--</h2>
+          <p class="card-footnote">Change across the rolling window</p>
+        </section>
+
+        <section class="card chart-card">
+          <div class="section-head">
+            <div>
+              <p class="card-label">Live Price Curve</p>
+              <h3>BTC/USDT Stream</h3>
+            </div>
+            <span id="symbol-badge" class="badge">Waiting...</span>
+          </div>
+          <canvas id="price-chart"></canvas>
+        </section>
+
+        <section class="card info-card">
+          <div class="section-head">
+            <div>
+              <p class="card-label">Pipeline Snapshot</p>
+              <h3>Current Metrics</h3>
+            </div>
+          </div>
+          <div class="info-grid">
+            <div>
+              <span class="info-label">Exchange</span>
+              <strong id="exchange">--</strong>
+            </div>
+            <div>
+              <span class="info-label">Total Trades</span>
+              <strong id="total-trades">--</strong>
+            </div>
+            <div>
+              <span class="info-label">Cumulative Volume</span>
+              <strong id="cumulative-volume">--</strong>
+            </div>
+            <div>
+              <span class="info-label">VWAP</span>
+              <strong id="vwap">--</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="card trades-card">
+          <div class="section-head">
+            <div>
+              <p class="card-label">Alerts</p>
+              <h3>Large Trades</h3>
+            </div>
+          </div>
+          <ul id="large-trades" class="trade-list">
+            <li>No large trades detected yet.</li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

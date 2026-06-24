@@ -1,0 +1,13 @@
+{
+  "name": "ingestion",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/index.js"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "ws": "^8.18.0"
+  }
+}

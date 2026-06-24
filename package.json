@@ -1,0 +1,16 @@
+{
+  "name": "real-time-crypto-market-monitoring-system",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "services/*"
+  ],
+  "scripts": {
+    "infra:up": "docker compose up -d",
+    "infra:down": "docker compose down",
+    "dev:ingestion": "npm --workspace services/ingestion run dev",
+    "dev:analytics": "npm --workspace services/analytics run dev",
+    "dev:api": "npm --workspace services/api run dev",
+    "check": "node --check services/ingestion/src/index.js && node --check services/analytics/src/index.js && node --check services/api/src/index.js && node --check services/api/public/app.js"
+  }
+}
